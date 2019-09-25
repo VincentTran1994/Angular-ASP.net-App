@@ -1,0 +1,80 @@
+drop database if exists MovieData;
+create database if not exists MovieData;
+
+use MovieData;
+
+drop table if exists users, userInfo, orderList, movieInfo;
+
+create table users
+(
+	userId int(11) not null auto_increment,
+	email varchar(255) 	unique, 
+    pass varchar(40) 	null,
+    
+	primary key (userId)
+);
+
+create table userInfo
+(
+	email varchar(255) 	unique,
+    fName varchar(255) 	not null,
+    lName varchar(255) 	not null,
+    joinDate date		,
+    gender char(1)		,
+    
+    primary key (email),
+    foreign key (email) references users(email)
+);
+
+create table movieInfo
+(
+	movieID int(11) 		unique,
+    movieName varchar(255) 	not null,
+    author varchar(255) 	,
+    publish date			,
+    
+    primary key (movieID)
+);
+
+create table orderList
+(
+	userID int(11) not null,
+    movieID int			not null,
+    
+    foreign key (userID) references users(userID),
+    foreign key (movieID) references movieInfo(movieID)
+);
+
+/*users*/
+insert into  users (email, pass) value("vincenttran@gmail.com","trancongvuit123");
+insert into  users (email, pass) value("rintran@gmail.com","trancongvuit123");
+insert into  users (email, pass) value("jacktran@gmail.com","trancongvuit123");
+insert into  users (email, pass) value("haodo@gmail.com","trancongvuit123");
+insert into  users (email, pass) value("hiepdo@gmail.com","trancongvuit123");
+insert into  users (email, pass) value("anhpham@gmail.com","trancongvuit123");
+insert into  users (email, pass) value("trancongvuit@gmail.com","trancongvuit123");
+insert into  users (email, pass) value("congvuit1@gmail.com","trancongvuit123");
+/*userInfo*/
+insert into  userInfo value("trancongvuit@gmail.com","vu","tran","1994-01-26","M");
+insert into  userInfo value("vincenttran@gmail.com","vincent","tran","1994-01-26","F");
+insert into  userInfo value("rintran@gmail.com","rin","tran","1994-01-26","M");
+insert into  userInfo value("jacktran@gmail.com","jack","tran","1991-09-07","F");
+insert into  userInfo value("haodo@gmail.com","hao","do","1995-05-23","M");
+insert into  userInfo value("hiepdo@gmail.com","hiep","do","1993-01-26","F");
+insert into  userInfo value("congvuit@gmail.com","anh","pham","1995-03-08","F");
+
+/*movieInfo*/
+insert into  movieInfo value(111,"movie name 1","vu tran","2018-01-26");
+insert into  movieInfo value(222,"movie name 2","jack tran","2020-01-26");
+insert into  movieInfo value(333,"movie name 3","hao do","2025-01-26");
+
+/*orderList*/
+insert into  orderList value(1,111);
+insert into  orderList value(2,222);
+insert into  orderList value(3,111);
+insert into  orderList value(1,222);
+insert into  orderList value(3,333);
+insert into  orderList value(2,333);
+insert into  orderList value(3,333);
+insert into  orderList value(1,222);
+
