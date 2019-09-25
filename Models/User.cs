@@ -7,7 +7,6 @@ namespace angularASPApp.DataContext
 {
     public class User
     {
-        public int userID { get; set; }
         public string email { get; set; }
         public string pass { get; set; }
     }

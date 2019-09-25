@@ -92,7 +92,7 @@ namespace angularASPApp.DataContext
                     {
                         list.Add(new UserInfo()
                         {
-                            email = reader["userID"].ToString(),
+                            email = reader["email"].ToString(),
                             fName = reader["FName"].ToString(),
                             lName = reader["LName"].ToString(),
                             joinDate = Convert.ToDateTime(reader["joinDate"]),
