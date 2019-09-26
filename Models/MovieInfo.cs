@@ -7,9 +7,9 @@ namespace angularASPApp.Models
 {
     public class MovieInfo
     {
-        public string movieID { get; set; }
-        public string name { get; set; }
-        public DateTime date { get; set; }
+        public int movieID { get; set; }
+        public string movieName { get; set; }
+        public DateTime publish { get; set; }
         public string author { get; set; }
 
     }

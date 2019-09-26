@@ -24,7 +24,14 @@ namespace angularASPApp.DataContext
                           + "; ";
 
             // Execute command
-            DatabaseManager.GetInstance.sqlCommand(mysqlCommand).ExecuteNonQuery();
+            try
+            {
+                DatabaseManager.GetInstance.sqlCommand(mysqlCommand).ExecuteNonQuery();
+            }
+            catch(Exception err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -35,8 +42,16 @@ namespace angularASPApp.DataContext
         {
             UserInfo user = (UserInfo) obj;
             string mySqlCommand = "delete from userInfo where email=\"" + user.email + "\";";
+            
             // Execute command
-            DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+            try
+            {
+                DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+            }
+            catch(Exception err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -70,7 +85,14 @@ namespace angularASPApp.DataContext
                                 + ",gender='" + updatedUser.gender +"'"
                                 + " where email = \"" + updatedUser.email +"\";";
             // Execute command
-            DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+            try
+            {
+                DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+            }
+            catch(Exception err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>

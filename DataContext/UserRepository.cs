@@ -20,7 +20,7 @@ namespace angularASPApp.DataContext
 
             using(MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider()){
                 UTF32Encoding utf32 = new UTF32Encoding();
-                byte[] data = md5.ComputeHash(utf32.GetBytes(newUser.email));
+                byte[] data = md5.ComputeHash(utf32.GetBytes(newUser.pass));
                 pass = Convert.ToBase64String(data);
             }
 
@@ -28,8 +28,15 @@ namespace angularASPApp.DataContext
             mySqlCommand += "\"" + newUser.email + "\","
                         + "\"" + pass + "\");";
 
-            // executing the sql command
-            DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+            // Execute command
+            try
+            {
+                DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+            }
+            catch(Exception err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -41,8 +48,15 @@ namespace angularASPApp.DataContext
             User user = (User) obj;
             string mySqlCommand = "delete from user where email=\"" + user.email + "\";";
 
-            // Execute command
-            DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+             // Execute command
+            try
+            {
+                DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+            }
+            catch(Exception err)
+            {
+                Console.WriteLine(err);
+            }
         }
 
         /// <summary>
@@ -92,10 +106,35 @@ namespace angularASPApp.DataContext
             }
         }
 
-
+        /// <summary>
+        /// Update existed user
+        /// </summary>
+        /// <param name="newObject"></param>
         public void Update(object obj)
         {
-            throw new NotImplementedException();
+            User updatedUser = (User) obj;
+            string pass = "";
+
+            using(MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider()){
+                UTF32Encoding utf32 = new UTF32Encoding();
+                byte[] data = md5.ComputeHash(utf32.GetBytes(updatedUser.pass));
+                pass = Convert.ToBase64String(data);
+            }
+            
+            string mySqlCommand = "update movieinfo "
+                                + "set"
+                                + " movieID = \"" + updatedUser.email + "\""
+                                + ",pass=\"" + pass + "\""
+                                + " where userID = " + updatedUser.userID + ";";
+            // Execute command
+            try
+            {
+                DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+            }
+            catch(Exception err)
+            {
+                Console.WriteLine(err);
+            }
         }
     }
 }
