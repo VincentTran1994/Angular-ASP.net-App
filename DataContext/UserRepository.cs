@@ -24,9 +24,9 @@ namespace angularASPApp.DataContext
                 pass = Convert.ToBase64String(data);
             }
 
-            string mySqlCommand = "insert users value(";
+            string mySqlCommand = "insert users (email, pass) value(";
             mySqlCommand += "\"" + newUser.email + "\","
-                        + "\"" + pass + "\");";
+                          + "\"" + pass + "\");";
 
             // executing the sql command
             DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
@@ -61,7 +61,7 @@ namespace angularASPApp.DataContext
         }
 
         /// <summary>
-        /// Get all users
+        /// Get all users from user repository
         /// </summary>
         /// <param name="newObject"></param>
         public List<object> GetAll()
@@ -76,10 +76,11 @@ namespace angularASPApp.DataContext
                 {
                     while (reader.Read())
                     {
-                        list.Add(new UserInfo()
+                        list.Add(new User()
                         {
+                            userId = (int) reader["userId"],
                             email = reader["email"].ToString(),
-                            fName = reader["pass"].ToString()
+                            pass = reader["pass"].ToString()
                         });
                     }
                 }
@@ -92,7 +93,10 @@ namespace angularASPApp.DataContext
             }
         }
 
-
+        /// <summary>
+        /// Update User repository
+        /// </summary>
+        /// <param name="obj"></param>
         public void Update(object obj)
         {
             throw new NotImplementedException();
