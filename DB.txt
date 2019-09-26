@@ -54,6 +54,7 @@ insert into  users (email, pass) value("hiepdo@gmail.com","trancongvuit123");
 insert into  users (email, pass) value("anhpham@gmail.com","trancongvuit123");
 insert into  users (email, pass) value("trancongvuit@gmail.com","trancongvuit123");
 insert into  users (email, pass) value("congvuit1@gmail.com","trancongvuit123");
+
 /*userInfo*/
 insert into  userInfo value("trancongvuit@gmail.com","vu","tran","1994-01-26","M");
 insert into  userInfo value("vincenttran@gmail.com","vincent","tran","1994-01-26","F");
