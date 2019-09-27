@@ -45,9 +45,10 @@ namespace angularASPApp.Controllers
             return UserInfoRepository.Get(userID) as UserInfo;
         }
 
-        [HttpPost("api/add-user-info")]
-        public void AddNewUserInfo([FromBody]UserInfo newUser)
+        [HttpPost("api/add-new-user")]
+        public void AddNewUserInfo([FromBody]object newUser)
         {
+            UserRepository.Create(newUser);
             UserInfoRepository.Create(newUser);
         }
 

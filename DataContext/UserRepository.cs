@@ -15,21 +15,26 @@ namespace angularASPApp.DataContext
         /// <param name="newObject"></param>
         public void Create(object obj)
         {
-            User newUser = (User) obj;
+            User newUser = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(obj.ToString());
+            
             string pass = "";
-
             using(MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider()){
                 UTF32Encoding utf32 = new UTF32Encoding();
-                byte[] data = md5.ComputeHash(utf32.GetBytes(newUser.email));
+                byte[] data = md5.ComputeHash(utf32.GetBytes(newUser.pass));
                 pass = Convert.ToBase64String(data);
             }
-
             string mySqlCommand = "insert users (email, pass) value(";
             mySqlCommand += "\"" + newUser.email + "\","
-                          + "\"" + pass + "\");";
-
-            // executing the sql command
-            DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+                      + "\"" + pass + "\");";
+            try
+            {
+                // executing the sql command
+                DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+            }
+            catch
+            {
+                Console.WriteLine("User is already existed can't add");
+            }
         }
 
         /// <summary>
@@ -39,7 +44,7 @@ namespace angularASPApp.DataContext
         public void Delete(object obj)
         {
             User user = (User) obj;
-            string mySqlCommand = "delete from user where email=\"" + user.email + "\";";
+            string mySqlCommand = "delete from users where email=\"" + user.email + "\";";
 
             // Execute command
             DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
