@@ -14,7 +14,7 @@ namespace angularASPApp.DataContext
         public void Create(object obj)
         {
             string mysqlCommand = "insert into  movieinfo value(";
-            MovieInfo newMovie = (MovieInfo) obj;
+            MovieInfo newMovie = Newtonsoft.Json.JsonConvert.DeserializeObject<MovieInfo>(obj.ToString());
 
             mysqlCommand +=  newMovie.movieID.ToString() + ","
                           + "\"" + newMovie.movieName + "\","
@@ -39,8 +39,8 @@ namespace angularASPApp.DataContext
         /// <param name="obj">UserInfo object</param>
         public void Delete(object obj)
         {
-            MovieInfo movie = (MovieInfo) obj;
-            string mySqlCommand = "delete from movieinfo where email=\"" + movie.movieID + "\";";
+            MovieInfo deletedMovie = Newtonsoft.Json.JsonConvert.DeserializeObject<MovieInfo>(obj.ToString());
+            string mySqlCommand = "delete from movieinfo where email=\"" + deletedMovie.movieID + "\";";
 
             // Execute command
             try
@@ -111,7 +111,7 @@ namespace angularASPApp.DataContext
         /// <param name="obj">new movieInfo object</param>
         public void Update(object obj)
         {
-            MovieInfo updateMovie = (MovieInfo) obj;
+            MovieInfo updateMovie = Newtonsoft.Json.JsonConvert.DeserializeObject<MovieInfo>(obj.ToString());
             string mySqlCommand = "update movieinfo "
                                 + "set"
                                 + " movieID = " + updateMovie.movieID
