@@ -13,8 +13,9 @@ namespace angularASPApp.DataContext
         /// <param name="newObject"></param>
         public void Create(object newObject)
         {
+            UserInfo newUser = Newtonsoft.Json.JsonConvert.DeserializeObject<UserInfo>(newObject.ToString());
             string mysqlCommand = "insert into  userInfo value(";
-            UserInfo newUser = (UserInfo) newObject;
+            
 
             mysqlCommand += "\"" + newUser.email + "\","
                           + "\"" + newUser.fName + "\","
@@ -22,16 +23,16 @@ namespace angularASPApp.DataContext
                           + "\"" + Convert.ToString(DateTime.Now.ToString("yyyy-MM-dd")) + "\","
                           + "\"" + newUser.gender.ToString() + "\")"
                           + "; ";
-
-            // Execute command
             try
             {
+                // Execute command
                 DatabaseManager.GetInstance.sqlCommand(mysqlCommand).ExecuteNonQuery();
             }
-            catch(Exception err)
+            catch
             {
-                Console.WriteLine(err);
+                Console.WriteLine("User is already existed can't add");
             }
+            
         }
 
         /// <summary>

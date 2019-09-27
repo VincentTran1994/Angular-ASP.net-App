@@ -10,31 +10,52 @@ namespace angularASPApp.Controllers
 {
     public class UsersController : Controller
     {
-        public UserInfoRepository DBcontext = new UserInfoRepository();
+        public UserInfoRepository UserInfoRepository = new UserInfoRepository();
+        public UserRepository UserRepository = new UserRepository();
+
+        [HttpPost("api/signup")]
+        public void SignUp([FromBody]User newUser)
+        {
+            UserRepository.Create(newUser);
+        }
 
         [HttpGet("api/users")]
-        public List<object> Info()
+        public List<object> Users()
         {
-            List<object> listAllMembers = DBcontext.GetAll();
+            List<object> listAllMembers = UserRepository.GetAll();
             return listAllMembers;
         }
 
         [HttpGet("api/user/{userID}")]
-        public UserInfo UserInfo(string userID)
+        public User GetUser(string userId)
         {
-            return DBcontext.Get(userID) as UserInfo;
+            return UserRepository.Get(userId) as User;
         }
 
-        [HttpPost("api/addnewuser")]
-        public void AddNewUser([FromBody]UserInfo newUser)
+        [HttpGet("api/users-info")]
+        public List<object> GetAllUserInfo()
         {
-            DBcontext.Create(newUser);
+            List<object> listAllMembers = UserInfoRepository.GetAll();
+            return listAllMembers;
         }
 
-        [HttpPut("api/updateduser")]
+        [HttpGet("api/user-info/{userID}")]
+        public UserInfo GetUserInfo(string userId)
+        {
+            return UserInfoRepository.Get(userId) as UserInfo;
+        }
+
+        [HttpPost("api/add-new-user")]
+        public void AddNewUserInfo([FromBody]object newUser)
+        {
+            UserRepository.Create(newUser);
+            UserInfoRepository.Create(newUser);
+        }
+
+        [HttpPut("api/update-user-info")]
         public void UpdatedUser(string email, [FromBody]UserInfo user)
         {
-            DBcontext.Update(user);
+            UserInfoRepository.Update(user);
         }
     }
 }

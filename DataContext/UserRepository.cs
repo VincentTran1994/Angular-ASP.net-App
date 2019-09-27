@@ -15,27 +15,25 @@ namespace angularASPApp.DataContext
         /// <param name="newObject"></param>
         public void Create(object obj)
         {
-            User newUser = (User) obj;
+            User newUser = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(obj.ToString());
+            
             string pass = "";
-
             using(MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider()){
                 UTF32Encoding utf32 = new UTF32Encoding();
                 byte[] data = md5.ComputeHash(utf32.GetBytes(newUser.pass));
                 pass = Convert.ToBase64String(data);
             }
-
-            string mySqlCommand = "insert users value(";
+            string mySqlCommand = "insert users (email, pass) value(";
             mySqlCommand += "\"" + newUser.email + "\","
-                        + "\"" + pass + "\");";
-
-            // Execute command
+                      + "\"" + pass + "\");";
             try
             {
+                // executing the sql command
                 DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
             }
-            catch(Exception err)
+            catch
             {
-                Console.WriteLine(err);
+                Console.WriteLine("User is already existed can't add");
             }
         }
 
@@ -46,7 +44,7 @@ namespace angularASPApp.DataContext
         public void Delete(object obj)
         {
             User user = (User) obj;
-            string mySqlCommand = "delete from user where email=\"" + user.email + "\";";
+            string mySqlCommand = "delete from users where email=\"" + user.email + "\";";
 
              // Execute command
             try
@@ -75,7 +73,7 @@ namespace angularASPApp.DataContext
         }
 
         /// <summary>
-        /// Get all users
+        /// Get all users from user repository
         /// </summary>
         /// <param name="newObject"></param>
         public List<object> GetAll()
@@ -90,10 +88,11 @@ namespace angularASPApp.DataContext
                 {
                     while (reader.Read())
                     {
-                        list.Add(new UserInfo()
+                        list.Add(new User()
                         {
+                            userId = (int) reader["userId"],
                             email = reader["email"].ToString(),
-                            fName = reader["pass"].ToString()
+                            pass = reader["pass"].ToString()
                         });
                     }
                 }
@@ -107,9 +106,9 @@ namespace angularASPApp.DataContext
         }
 
         /// <summary>
-        /// Update existed user
+        /// Update User repository
         /// </summary>
-        /// <param name="newObject"></param>
+        /// <param name="obj"></param>
         public void Update(object obj)
         {
             User updatedUser = (User) obj;
@@ -125,7 +124,7 @@ namespace angularASPApp.DataContext
                                 + "set"
                                 + " movieID = \"" + updatedUser.email + "\""
                                 + ",pass=\"" + pass + "\""
-                                + " where userID = " + updatedUser.userID + ";";
+                                + " where userID = " + updatedUser.userId + ";";
             // Execute command
             try
             {
