@@ -41,8 +41,8 @@ namespace angularASPApp.DataContext
         /// <param name="obj">UserInfo object</param>
         public void Delete(object obj)
         {
-            UserInfo user = (UserInfo) obj;
-            string mySqlCommand = "delete from userInfo where email=\"" + user.email + "\";";
+            UserInfo deletedUser = Newtonsoft.Json.JsonConvert.DeserializeObject<UserInfo>(obj.ToString());
+            string mySqlCommand = "delete from userInfo where email=\"" + deletedUser.email + "\";";
             
             // Execute command
             try
@@ -78,7 +78,7 @@ namespace angularASPApp.DataContext
         /// <param name="obj">new userInfo object</param>
         public void Update(object obj)
         {
-            UserInfo updatedUser = (UserInfo)obj;
+            UserInfo updatedUser = Newtonsoft.Json.JsonConvert.DeserializeObject<UserInfo>(obj.ToString());
             string mySqlCommand = "update userInfo "
                                 + "set"
                                 + " fName=\"" + updatedUser.fName + "\""

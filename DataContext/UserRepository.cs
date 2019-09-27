@@ -43,8 +43,8 @@ namespace angularASPApp.DataContext
         /// <param name="newObject"></param>
         public void Delete(object obj)
         {
-            User user = (User) obj;
-            string mySqlCommand = "delete from users where email=\"" + user.email + "\";";
+            User deletedUser = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(obj.ToString());
+            string mySqlCommand = "delete from users where email=\"" + deletedUser.email + "\";";
 
              // Execute command
             try
@@ -111,7 +111,7 @@ namespace angularASPApp.DataContext
         /// <param name="obj"></param>
         public void Update(object obj)
         {
-            User updatedUser = (User) obj;
+            User updatedUser = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(obj.ToString());
             string pass = "";
 
             using(MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider()){
