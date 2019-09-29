@@ -52,9 +52,9 @@ namespace angularASPApp.Controllers
         /// <param name="userId"></param>
         /// <returns></returns>
         [HttpGet("api/user-info/{userID}")]
-        public UserInfo GetUserInfo(string userId)
+        public Order GetUserInfo(string userId)
         {
-            return UserInfoRepository.Get(userId) as UserInfo;
+            return UserInfoRepository.Get(userId) as Order;
         }
 
         /// <summary>
@@ -67,8 +67,6 @@ namespace angularASPApp.Controllers
             List<object> listAllMembers = UserInfoRepository.GetAll();
             return listAllMembers;
         }
-
-        
 
         /// <summary>
         /// Update user information

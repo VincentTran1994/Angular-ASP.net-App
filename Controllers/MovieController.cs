@@ -12,21 +12,66 @@ namespace angularASPApp.Controllers
         MovieInfoRepository movieRespository = new MovieInfoRepository();
 
         [HttpGet("api/movies")]
-        public HttpResponseMessage GetAllMovieInfo()
+        public List<object> GetAllMovieInfo()
         {
-            List<object> listAllMovies = movieRespository.GetAll();
-            HttpResponseMessage response = new HttpResponseMessage();
-            response.Content = new StringContent(listAllMovies.ToString());
-            if(response.StatusCode== System.Net.HttpStatusCode.OK)
-                return response;
-            else
-                return new HttpResponseMessage(System.Net.HttpStatusCode.NotImplemented);
+            try
+            {
+                List<object> listAllMovies = movieRespository.GetAll();
+                return listAllMovies;
+            }
+            catch
+            {
+                return null;
+            }    
         }
 
-        [HttpPost("api/ad-new-movie")]
-        public void AddNewMovie([FromBody]MovieInfo newMovie)
+        [HttpGet("api/movie/{movieId}")]
+        public MovieInfo GetMovie(int movieId)
         {
-            movieRespository.Create(newMovie);
+            HttpResponseMessage response = new HttpResponseMessage();
+            List<object> listMovie = GetAllMovieInfo();
+            MovieInfo temp = new MovieInfo();
+            foreach (MovieInfo item in listMovie)
+            {
+                if(item.movieID == movieId)
+                {
+                    temp = item;
+                    break;
+                }
+            }
+            return temp;
+        }
+
+        [HttpPost("api/add-new-movie")]
+        public HttpResponseMessage AddNewMovie([FromBody]object newMovie)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            if (movieRespository.Create(newMovie))
+            {
+                response.StatusCode = System.Net.HttpStatusCode.OK;
+                return response;
+            } 
+            else
+            {
+                response.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                return response;
+            }
+        }
+
+        [HttpDelete("api/delete/{movieId}")]
+        public HttpResponseMessage DeleteMovie([FromBody]object deletedMovie)
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            if (movieRespository.Create(deletedMovie))
+            {
+                response.StatusCode = System.Net.HttpStatusCode.OK;
+                return response;
+            }
+            else
+            {
+                response.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                return response;
+            }
         }
     }
 }
