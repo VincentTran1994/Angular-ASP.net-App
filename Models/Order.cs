@@ -7,6 +7,7 @@ namespace angularASPApp.Models
 {
     public class Order
     {
+        public int orderID { get; set; }
         public int userID { get; set; }
         public int movieID { get; set; }
         public DateTime dateOrder { get; set; }

@@ -40,5 +40,38 @@ namespace angularASPApp.Controllers
                 return response;
             }
         }
+
+        [HttpDelete("api/delete-order")]
+        public HttpResponseMessage DeletedOrder([FromBody]object order)
+        {
+            var response = new HttpResponseMessage();
+            if (orderRepo.Delete(order) == true)
+            {
+                response.StatusCode = System.Net.HttpStatusCode.OK;
+                return response;
+            }
+            else
+            {
+                response.StatusCode = System.Net.HttpStatusCode.NotImplemented;
+                return response;
+            }
+        }
+
+        [HttpPut("api/update-order")]
+        public HttpResponseMessage UpdateOrder([FromBody]object order)
+
+        {
+            var response = new HttpResponseMessage();
+            if (orderRepo.Update(order) == true)
+            {
+                response.StatusCode = System.Net.HttpStatusCode.OK;
+                return response;
+            }
+            else
+            {
+                response.StatusCode = System.Net.HttpStatusCode.NotImplemented;
+                return response;
+            }
+        }
     }
 }

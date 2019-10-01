@@ -51,8 +51,9 @@ namespace angularASPApp.DataContext
                     {
                         listOrder.Add(new Order()
                         {
-                            userID = (int)reader["userID"],
-                            movieID = (int)reader["movieID"],
+                            orderID = (int)reader["orderId"],
+                            userID = (int)reader["userId"],
+                            movieID = (int)reader["movieId"],
                             dateOrder = Convert.ToDateTime(reader["dateOrder"])
                         });
                     }
@@ -83,6 +84,7 @@ namespace angularASPApp.DataContext
                     {
                         listOrder.Add(new Order()
                         {
+                            orderID = (int)reader["orderId"],
                             userID  = (int)reader["userID"],
                             movieID = (int)reader["movieID"],
                             dateOrder = Convert.ToDateTime(reader["dateOrder"])
@@ -104,7 +106,7 @@ namespace angularASPApp.DataContext
         /// <returns></returns>
         public bool Create(object obj)
         {
-            string mysqlCommand = "insert into  orderList value(";
+            string mysqlCommand = "insert into orderList (userID, movieID, dateOrder) value(";
             Order newOrder = Newtonsoft.Json.JsonConvert.DeserializeObject<Order>(obj.ToString());
 
             mysqlCommand += newOrder.userID.ToString() + ","
@@ -131,7 +133,7 @@ namespace angularASPApp.DataContext
         public bool Delete(object obj)
         {
             Order deleteOrder = Newtonsoft.Json.JsonConvert.DeserializeObject<Order>(obj.ToString());
-            string mySqlCommand = "delete from orderList where userId=\"" + deleteOrder.userID.ToString() + "\";";
+            string mySqlCommand = "delete from orderList where orderId=\"" + deleteOrder.orderID.ToString() + "\";";
 
             // Execute command
             try
@@ -141,7 +143,6 @@ namespace angularASPApp.DataContext
             }
             catch (Exception err)
             {
-                Console.WriteLine(err);
                 return false;
             }
         }
@@ -156,8 +157,9 @@ namespace angularASPApp.DataContext
             Order updatedOrder = Newtonsoft.Json.JsonConvert.DeserializeObject<Order>(obj.ToString());
             string mySqlCommand = "update orderList "
                                 + "set "
-                                + "movieID=\"" + updatedOrder.movieID.ToString() + "\""
-                                + " where userId = \"" + updatedOrder.userID + "\";";
+                                //+ "userId=\"" + updatedOrder.userID.ToString() + "\","
+                                + "movieId=\"" + updatedOrder.movieID.ToString() + "\""
+                                + " where orderId = \"" + updatedOrder.orderID + "\";";
             // Execute command
             try
             {
