@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Http, Response } from '@angular/http';
 
 @Component({
   selector: 'app-nav-menu',
@@ -6,13 +7,47 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-  isExpanded = false;
+  //declare lists
+  public listsSearch : [];
+  public dropDown = false;
+  public urlAPI : string;
+  public movieSearch: String;
+  public searchWidth = true;
 
-  collapse() {
-    this.isExpanded = false;
+  constructor(private http: Http) {
+    // this.http.get()
+    // .subscribe(listSearch => this.lists = listSearch);
   }
 
-  toggle() {
-    this.isExpanded = !this.isExpanded;
+
+  onKeyPress($event){
+
+      this.urlAPI = 'https://www.omdbapi.com/?s=' + this.movieSearch + '&apikey=thewdb';
+
+      this.http.get(this.urlAPI)
+        .subscribe((lists: Response) => {
+          console.log(lists);
+          this.listsSearch = lists.json().Search;
+        });
+  }
+
+  onfocus(){
+    this.dropDown = !this.dropDown;
+    console.log("drom onforcus: " + this.dropDown);
+    if(this.dropDown)
+      this.searchWidth = false;
+    else
+      this.searchWidth = true;
+  }
+
+  onblur(){
+    console.log(this.listsSearch.length);
+    this.searchWidth = true;
+    
+    console.log("from onblur: " + this.dropDown);
+    this.dropDown = !this.dropDown;
+    this.onfocus();
+    // this.movieSearch = "";
+    
   }
 }

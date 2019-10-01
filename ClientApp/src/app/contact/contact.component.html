@@ -1,0 +1,200 @@
+<div class="jumbotron">
+    <h1 class="display-2">Contact 24/7</h1>
+    <hr>
+    <h1 class="display-4">
+      We'd
+      <i class="fa fa-heart-o" style="color:rgb(192, 21, 21);" aria-hidden="true"></i>
+      to help!</h1>
+    <p class="lead">
+      We like to create things with fun, open-minded. Feel free to say hello
+    </p>
+
+    <div class="row">
+      <div class="col-2"></div>
+      
+      <div class="col-4">
+          <div class="container form">
+              <form #f="ngForm" (ngSubmit) = "onSubmit(f)">
+                <fieldset>
+                  <!-- Name -->
+                  <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="name"
+                      [value]="f.value.name"
+                      ngModel
+                      name="name"
+                      #name="ngModel"
+                      placeholder="First and Last name"
+                      required
+                      >
+                  </div>
+            
+                  <!-- Email -->
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="email"
+                      [value]="f.value.email"
+                      ngModel
+                      name="email"
+                      placeholder="Email"
+                      required
+                      >
+                  </div>
+            
+                  <!-- Phone -->
+                  <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="phone"
+                      [value]="f.value.phone"
+                      ngModel
+                      name="phone"
+                      placeholder="Phone Number"
+                      required
+                      >
+                  </div>
+            
+                  <!-- Request -->
+                  <div class="form-group">
+                    <label for="request">Request</label>
+                    <textarea
+                      class="form-control"
+                      id="request"
+                      [value]="f.value.request"
+                      rows="5"
+                      ngModel
+                      name="request"
+                      placeholder="Please enter your request here ..."></textarea>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-outline-secondary" 
+                    style="font-size: 20px; cursor: pointer;">
+                    Submit
+                    </button>
+                  </div>
+                </fieldset>
+                
+              </form>
+              <br>
+            </div>
+      </div>
+
+      <div class="col-4">
+        <div class="row">
+          <div class="col-4"></div>
+
+          <div class="col-4">
+            <div>
+              <i class="fa fa-map-marker fa-2x block" 
+                style="margin-bottom: 2%;"  
+                aria-hidden="true" 
+                (click)="faOnClick()">
+              </i>
+              <div *ngIf="mapDropDown" class="mapDropDown">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d106144.41962849755!2d-84.387628!3d33.760327!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9a7886c4cdd34842!2sGeorgia+State+University+Office+of+Undergraduate+Admissions!5e0!3m2!1svi!2sus!4v1511927492732" 
+                  width="300" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+              </div>
+              <br>
+              <p class="lead" style="color: rgb(219, 211, 211); margin-bottom: 40px;">
+                Georgia State University
+                <br>
+                <small class="text-muted">Alanta, Georgia</small>
+              </p>
+            </div>
+
+            <br>
+            <div>
+              <i class="fa fa-phone fa-2x block" 
+                style="margin-bottom: 2%;" 
+                aria-hidden="true"
+                (click)="faOnClick()"
+                ></i>
+              <p class="lead" style="color: rgb(219, 211, 211); margin-bottom: 40px;">
+                (832) - 997 - 3345
+                <br>
+                <small class="text-muted">Mobie Phone</small>
+              </p>
+            </div>
+            <br>
+            <div>
+              <i class="fa fa-envelope fa-2x block" 
+                style="margin-bottom: 2%;" 
+                aria-hidden="true"
+                (click)="faOnClick()"
+                ></i>
+              <br>
+              <p class="lead" style="color: rgb(219, 211, 211); margin-bottom: 20px;">
+                ilovemovie@gmail.com
+              </p>
+            </div>
+          </div>
+
+          <div class="col-4"></div>
+        </div>
+        <hr>
+
+        <div>
+          <div style="text-align: center;">
+            <i class="fa fa-facebook-official fa-2x"  aria-hidden="true"></i>
+            <i class="fa fa-linkedin fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-twitter fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-google-plus fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-wikipedia-w fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-apple fa-2x" aria-hidden="true"></i>
+          </div>
+          <p class="text-center">Grover Web Design on Bootstrap</p>
+        </div>
+      </div>
+
+      <div class="col-2"></div>
+    </div>
+</div>
+
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"># Ticket</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Email</th>
+        <th scope="col" style="text-align:center;">Status</th>
+      </tr>
+    </thead>
+
+    <tbody *ngFor = "let contact of contacts ; let i =index">
+
+      <tr>
+        <th scope="row">{{(i + 1)}}</th>
+        <td>{{contact.name}}</td>
+        <td>{{contact.phone}}</td>
+        <td>{{contact.email}}</td>
+        <td style=" border:0px;text-align:center;">
+          <button 
+            class="btn btn-secondary view" 
+            style="color:#fff; cursor: pointer;" 
+            (click)=onDetail(contact._id)>
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            View
+          </button>
+          <button 
+            class="btn btn-secondary delete" 
+            style="color:#fff; cursor: pointer;" 
+            (click)=onDelete(contact._id)>
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+            Delete
+          </button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

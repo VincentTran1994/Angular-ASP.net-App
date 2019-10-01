@@ -1,4 +1,4 @@
-<div class='main-nav'>
+<!-- <div class='main-nav'>
     <div class='navbar navbar-inverse'>
         <div class='navbar-header'>
             <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse' [attr.aria-expanded]='isExpanded' (click)='toggle()'>
@@ -30,4 +30,105 @@
             </ul>
         </div>
     </div>
-</div>
+</div> -->
+
+<nav class="navbar navbar-expand-lg navbar-light"
+    style="
+    border-bottom-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px;">
+
+    <button class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarColor03"
+      aria-controls="navbarColor03"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <a class="navbar-brand" routerLink='welcome' >
+      Movie App
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarColor03">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active current">
+
+          <a class="nav-link" routerLink='/homePage' id="navbar-expaned">
+            <span class='glyphicon glyphicon-home'></span>
+            Home
+          </a>
+
+        </li>
+
+        <li class="nav-item" routerLinkActive="active current">
+
+          <a class="nav-link" routerLink='/schedule' id="navbar-expaned">
+            <span class='glyphicon glyphicon-calendar'></span>
+            Schedule
+          </a>
+
+        </li>
+
+        <li class="nav-item" routerLinkActive="active current">
+
+          <a class="nav-link" routerLink='/contact' id="navbar-expaned">
+            <i class="fa fa-link" aria-hidden="true"></i>
+            Contact
+          </a>
+
+        </li>
+
+        <li class="nav-item" routerLinkActive="active current" >
+
+          <a class="nav-link" routerLink='/about' id="navbar-expaned">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            About
+          </a>
+
+        </li>
+
+      </ul>
+
+      <div class="pos-rel">
+          <ul class="nav navbar-nav navbar-left">
+              <form class="form-inline">
+                <fieldset>
+                    <div class="wrapper">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                        <input [(ngModel)]="movieSearch"
+                        name="movieSearch"
+                        class="form-control mr-sm-2"
+                        type="text"
+                        placeholder="Search movie..."
+                        autocomplete="off"
+                        (keyup) = "onKeyPress($event)"
+                        (click) = "onfocus()"
+                        (blur) = "onblur()" >
+                    </div>
+                </fieldset>
+              </form>
+
+              <li class="nav-item" routerLinkActive="active current">
+                <a class="nav-link" routerLink='/list'><i class="fa fa-shopping-cart" aria-hidden="true"></i> My Cart</a>
+              </li>
+          </ul>
+
+          <div *ngIf="dropDown" class="container dropdown-content" >
+            <div class="listContents" *ngFor = 'let list of listsSearch'>
+                <a class="container" [routerLink]="['/detail',list.imdbID]" (click) = "onfocus()">
+                  <div>
+                    <img class="img" src="{{list.Poster}}">
+                    {{list.Title}}
+                  </div>
+                  <small>{{list.Year}}</small>
+                </a>
+            </div>
+          </div>
+
+      </div>
+
+    </div>
+</nav>

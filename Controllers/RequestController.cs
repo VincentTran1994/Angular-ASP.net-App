@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace angularASPApp.Controllers
 {
-    public class UsersController : Controller
+    public class RequestController : Controller
     {
-        public UserInfoRepository UserInfoRepository = new UserInfoRepository();
+        public RequestRepository RequestRepository = new RequestRepository();
         public UserRepository UserRepository = new UserRepository();
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace angularASPApp.Controllers
         public void AddNewUser([FromBody]object newUser)
         {
             UserRepository.Create(newUser);
-            UserInfoRepository.Create(newUser);
+            RequestRepository.Create(newUser);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace angularASPApp.Controllers
         [HttpGet("api/user-info/{userID}")]
         public User GetUserInfo(string userId)
         {
-            return UserInfoRepository.Get(userId) as User;
+            return RequestRepository.Get(userId) as User;
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace angularASPApp.Controllers
         [HttpGet("api/users-info")]
         public List<object> GetAllUserInfo()
         {
-            List<object> listAllMembers = UserInfoRepository.GetAll();
+            List<object> listAllMembers = RequestRepository.GetAll();
             return listAllMembers;
         }
 
@@ -74,7 +74,7 @@ namespace angularASPApp.Controllers
         [HttpPut("api/update-user-info")]
         public void UpdatedUser([FromBody]object user)
         {
-            UserInfoRepository.Update(user);
+            RequestRepository.Update(user);
             UserRepository.Update(user);
         }
 
@@ -84,7 +84,7 @@ namespace angularASPApp.Controllers
         [HttpDelete("api/delete-user-info")]
         public void DeletedUser([FromBody]object user)
         {
-            UserInfoRepository.Delete(user);
+            RequestRepository.Delete(user);
             UserRepository.Delete(user);
         }
     }
