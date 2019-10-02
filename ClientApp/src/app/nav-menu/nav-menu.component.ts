@@ -8,7 +8,7 @@ import { Http, Response } from '@angular/http';
 })
 export class NavMenuComponent {
   //declare lists
-  public listsSearch : [];
+  public listsSearch : any[];
   public dropDown = false;
   public urlAPI : string;
   public movieSearch: String;
@@ -47,7 +47,5 @@ export class NavMenuComponent {
     console.log("from onblur: " + this.dropDown);
     this.dropDown = !this.dropDown;
     this.onfocus();
-    // this.movieSearch = "";
-    
   }
 }

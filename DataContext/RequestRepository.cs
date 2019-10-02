@@ -10,7 +10,7 @@ namespace angularASPApp.DataContext
     public class RequestRepository : IDataRepository
     {
         /// <summary>
-        /// Get a record of order info
+        /// Get a record of request
         /// </summary>
         /// <param name="requestId"></param>
         /// <returns></returns>
@@ -37,6 +37,10 @@ namespace angularASPApp.DataContext
                 
         }
 
+        /// <summary>
+        /// Get all requests
+        /// </summary>
+        /// <returns></returns>
         public List<object> GetAll()
         {
             List<object> requests = new List<object>();
@@ -68,41 +72,7 @@ namespace angularASPApp.DataContext
         }
 
         /// <summary>
-        /// Get history of order info
-        /// </summary>
-        /// <returns></returns>
-        public List<object> GetAll(string userId)
-        {
-            List<object> requests = new List<object>();
-            string mySqlCommand = "select * from request where userId = " + userId + ";";
-            try
-            {
-                // Execute a sql query
-                MySqlCommand command = DatabaseManager.GetInstance.sqlCommand(mySqlCommand);
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        requests.Add(new Request()
-                        {
-                            requestId = (int)reader["requestId"],
-                            userId = (int)reader["userId"],
-                            title = reader["title"].ToString(),
-                            content = reader["title"].ToString(),
-                            dateRequest = Convert.ToDateTime(reader["dateRequest"])
-                        });
-                    }
-                }
-                return requests;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Creat a new order
+        /// Creat a new request
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -129,7 +99,7 @@ namespace angularASPApp.DataContext
         }
 
         /// <summary>
-        /// Cancel an order
+        /// Cancel an request
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -151,7 +121,7 @@ namespace angularASPApp.DataContext
         }
 
         /// <summary>
-        /// Update a existing order
+        /// Update a existing request
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
