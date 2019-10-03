@@ -34,9 +34,9 @@ namespace angularASPApp.Controllers
         }
 
         [HttpGet("api/user-info/{userID}")]
-        public User GetUserInfo(string userId)
+        public UserInfo GetUserInfo(string userId)
         {
-            return UserInfoRepository.Get(userId) as User;
+            return UserInfoRepository.Get(userId) as UserInfo;
         }
 
         [HttpGet("api/users-info")]
@@ -46,18 +46,18 @@ namespace angularASPApp.Controllers
             return listAllMembers;
         }
     
-        [HttpPut("api/update-user-info")]
+        [HttpPut("api/update-user")]
         public void UpdatedUser([FromBody]object user)
         {
             UserInfoRepository.Update(user);
             UserRepository.Update(user);
         }
 
-        [HttpDelete("api/delete-user-info")]
-        public void DeletedUser([FromBody]object user)
+        [HttpDelete("api/delete-user/{userId}")]
+        public void DeletedUser(string userId)
         {
-            UserInfoRepository.Delete(user);
-            UserRepository.Delete(user);
+            UserInfoRepository.Delete(userId);
+            UserRepository.Delete(userId);
         }
     }
 }

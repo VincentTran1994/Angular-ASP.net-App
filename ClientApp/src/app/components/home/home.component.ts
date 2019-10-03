@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user-service/user.service';
+import { userInfo } from '../../domain-objects/userInfo';
 
 @Component({
   selector: 'app-home',
@@ -7,15 +8,13 @@ import { UserService } from '../../services/user-service/user.service';
   styleUrls:['./home.component.css']
 })
 export class HomeComponent {
-  usersInfo : object[];
+  usersInfo : userInfo[];
+  user: userInfo;
 
   constructor(private userService: UserService){
-    this.userService.GetAllUserInfo().subscribe(
-      usersInfo =>{
-        this.usersInfo = usersInfo;
-        console.log(this.usersInfo);
-      }
-    );
+    this.user = this.userService.GetUser("congvuit@gmail.com");
+    console.log("hello");
+    console.log(this.user);
   }
   
   
