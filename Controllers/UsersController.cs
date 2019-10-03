@@ -34,9 +34,9 @@ namespace angularASPApp.Controllers
         }
 
         [HttpGet("api/user-info/{userID}")]
-        public User GetUserInfo(string userId)
+        public UserInfo GetUserInfo(string userId)
         {
-            return UserInfoRepository.Get(userId) as User;
+            return UserInfoRepository.Get(userId) as UserInfo;
         }
 
         [HttpGet("api/users-info")]
