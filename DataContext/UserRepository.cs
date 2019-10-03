@@ -13,7 +13,7 @@ namespace angularASPApp.DataContext
         /// Creating a new user
         /// </summary>
         /// <param name="newObject"></param>
-        public void Create(object obj)
+        public bool Create(object obj)
         {
             User newUser = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(obj.ToString());
             
@@ -30,10 +30,12 @@ namespace angularASPApp.DataContext
             {
                 // executing the sql command
                 DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+                return true;
             }
             catch
             {
                 Console.WriteLine("User is already existed can't add");
+                return false;
             }
         }
 
@@ -41,7 +43,7 @@ namespace angularASPApp.DataContext
         /// Deleting a user
         /// </summary>
         /// <param name="newObject"></param>
-        public void Delete(object obj)
+        public bool Delete(object obj)
         {
             User deletedUser = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(obj.ToString());
             string mySqlCommand = "delete from users where email=\"" + deletedUser.email + "\";";
@@ -50,10 +52,12 @@ namespace angularASPApp.DataContext
             try
             {
                 DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+                return true;
             }
             catch(Exception err)
             {
                 Console.WriteLine(err);
+                return false;
             }
         }
 
@@ -109,7 +113,7 @@ namespace angularASPApp.DataContext
         /// Update User repository
         /// </summary>
         /// <param name="obj"></param>
-        public void Update(object obj)
+        public bool Update(object obj)
         {
             User updatedUser = Newtonsoft.Json.JsonConvert.DeserializeObject<User>(obj.ToString());
             string pass = "";
@@ -129,10 +133,12 @@ namespace angularASPApp.DataContext
             try
             {
                 DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+                return true;
             }
             catch(Exception err)
             {
                 Console.WriteLine(err);
+                return false;
             }
         }
     }

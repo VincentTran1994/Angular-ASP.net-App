@@ -11,25 +11,25 @@ namespace angularASPApp.DataContext
         /// Create a new movie from the database
         /// </summary>
         /// <param name="newObject"></param>
-        public void Create(object obj)
+        public bool Create(object obj)
         {
             string mysqlCommand = "insert into  movieinfo value(";
             MovieInfo newMovie = Newtonsoft.Json.JsonConvert.DeserializeObject<MovieInfo>(obj.ToString());
 
-            mysqlCommand +=  newMovie.movieID.ToString() + ","
+            mysqlCommand += newMovie.movieID.ToString() + ","
                           + "\"" + newMovie.movieName + "\","
                           + "\"" + newMovie.author + "\","
-                          + "\"" + Convert.ToString(DateTime.Now.ToString("yyyy-MM-dd")) + "\","
-                          + "; ";
+                          + "\"" + Convert.ToString(DateTime.Now.ToString("yyyy-MM-dd")) + "\");";
 
             // Execute command
             try
             {
                 DatabaseManager.GetInstance.sqlCommand(mysqlCommand).ExecuteNonQuery();
+                return true;
             }
             catch(Exception err)
             {
-                Console.WriteLine(err);
+                return false;
             }
         }
 
@@ -37,7 +37,7 @@ namespace angularASPApp.DataContext
         /// Deleted an existing movie from the database
         /// </summary>
         /// <param name="obj">UserInfo object</param>
-        public void Delete(object obj)
+        public bool Delete(object obj)
         {
             MovieInfo deletedMovie = Newtonsoft.Json.JsonConvert.DeserializeObject<MovieInfo>(obj.ToString());
             string mySqlCommand = "delete from movieinfo where email=\"" + deletedMovie.movieID + "\";";
@@ -46,10 +46,12 @@ namespace angularASPApp.DataContext
             try
             {
                 DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+                return true;
             }
             catch(Exception err)
             {
                 Console.WriteLine(err);
+                return false;
             }
         }
 
@@ -79,10 +81,10 @@ namespace angularASPApp.DataContext
         {
             List<object> list = new List<object>();
             string mysqlCommand = "select * from movieinfo;";
-            MySqlCommand command = DatabaseManager.GetInstance.sqlCommand(mysqlCommand);
-
+            
             try
             {
+                MySqlCommand command = DatabaseManager.GetInstance.sqlCommand(mysqlCommand);
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -109,7 +111,7 @@ namespace angularASPApp.DataContext
         /// Update existed movie from movieInfo table
         /// </summary>
         /// <param name="obj">new movieInfo object</param>
-        public void Update(object obj)
+        public bool Update(object obj)
         {
             MovieInfo updateMovie = Newtonsoft.Json.JsonConvert.DeserializeObject<MovieInfo>(obj.ToString());
             string mySqlCommand = "update movieinfo "
@@ -123,10 +125,12 @@ namespace angularASPApp.DataContext
             try
             {
                 DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+                return true;
             }
             catch(Exception err)
             {
                 Console.WriteLine(err);
+                return false;
             }
         }
     }

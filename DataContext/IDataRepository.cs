@@ -6,8 +6,8 @@ namespace angularASPApp.DataContext
     {
         List<object> GetAll();
         object Get(string userId);
-        void Create(object obj);
-        void Update(object obj);
-        void Delete(object obj);
+        bool Create(object obj);
+        bool Update(object obj);
+        bool Delete(object obj);
     }
 }

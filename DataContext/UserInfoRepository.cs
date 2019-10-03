@@ -11,7 +11,7 @@ namespace angularASPApp.DataContext
         /// trying to avoid update syntax
         /// </summary>
         /// <param name="newObject"></param>
-        public void Create(object newObject)
+        public bool Create(object newObject)
         {
             UserInfo newUser = Newtonsoft.Json.JsonConvert.DeserializeObject<UserInfo>(newObject.ToString());
             string mysqlCommand = "insert into  userInfo value(";
@@ -27,10 +27,12 @@ namespace angularASPApp.DataContext
             {
                 // Execute command
                 DatabaseManager.GetInstance.sqlCommand(mysqlCommand).ExecuteNonQuery();
+                return true;
             }
             catch
             {
                 Console.WriteLine("User is already existed can't add");
+                return false;
             }
             
         }
@@ -39,7 +41,7 @@ namespace angularASPApp.DataContext
         /// Deleted an existing user from userInfo
         /// </summary>
         /// <param name="obj">UserInfo object</param>
-        public void Delete(object obj)
+        public bool Delete(object obj)
         {
             UserInfo deletedUser = Newtonsoft.Json.JsonConvert.DeserializeObject<UserInfo>(obj.ToString());
             string mySqlCommand = "delete from userInfo where email=\"" + deletedUser.email + "\";";
@@ -48,10 +50,12 @@ namespace angularASPApp.DataContext
             try
             {
                 DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+                return true;
             }
             catch(Exception err)
             {
                 Console.WriteLine(err);
+                return false;
             }
         }
 
@@ -76,7 +80,7 @@ namespace angularASPApp.DataContext
         /// Update existed user from userInfo table
         /// </summary>
         /// <param name="obj">new userInfo object</param>
-        public void Update(object obj)
+        public bool Update(object obj)
         {
             UserInfo updatedUser = Newtonsoft.Json.JsonConvert.DeserializeObject<UserInfo>(obj.ToString());
             string mySqlCommand = "update userInfo "
@@ -89,10 +93,12 @@ namespace angularASPApp.DataContext
             try
             {
                 DatabaseManager.GetInstance.sqlCommand(mySqlCommand).ExecuteNonQuery();
+                return true;
             }
             catch(Exception err)
             {
                 Console.WriteLine(err);
+                return false;
             }
         }
 

@@ -1,0 +1,50 @@
+.jumbotron{
+    background: black;
+}
+
+h1{
+    text-align: center;
+}
+
+.lead{
+    text-align: center;
+}
+
+.col-4{
+    margin-top: 4%;
+}
+
+hr{
+    border: .45px rgb(226, 222, 222) solid;
+    width: 80%;
+}
+
+.block{
+    display: block;
+}
+
+i{
+    text-align: center;
+    margin: 2%;
+}
+
+div.form{
+    width: 100%;
+}
+
+.fa:hover{
+    -webkit-text-fill-color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.mapDropDown{
+    position: absolute;
+    z-index: 1;
+}
+
+.view:hover{
+    background-color: rgb(64, 155, 207);
+}
+.delete:hover{
+    background-color: rgb(168, 15, 15);
+}
