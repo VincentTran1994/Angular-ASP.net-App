@@ -1,5 +1,14 @@
 export class userInfo{
     
+    private userId : Number;
+    public getuserId() : Number {
+        return this.userId;
+    }
+    public setuserId(v : Number) {
+        this.userId = v;
+    }
+    
+    
     private email : string;
     public getemail() : string {
         return this.email;

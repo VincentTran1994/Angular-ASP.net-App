@@ -24,6 +24,7 @@ export class HomeComponent {
         console.log(res);
       }
     );
+
   }
   
   
