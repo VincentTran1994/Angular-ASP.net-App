@@ -12,40 +12,26 @@ export class NavMenuComponent {
   public dropDown = false;
   public urlAPI : string;
   public movieSearch: String;
-  public searchWidth = true;
 
-  constructor(private http: Http) {
-    // this.http.get()
-    // .subscribe(listSearch => this.lists = listSearch);
-  }
+  constructor(private http: Http) { }
 
 
   onKeyPress($event){
-
       this.urlAPI = 'https://www.omdbapi.com/?s=' + this.movieSearch + '&apikey=thewdb';
 
       this.http.get(this.urlAPI)
         .subscribe((lists: Response) => {
-          console.log(lists);
           this.listsSearch = lists.json().Search;
         });
+        
+      (this.listsSearch.length > 0) ? this.dropDown = true : this.dropDown = false;
   }
 
   onfocus(){
-    this.dropDown = !this.dropDown;
-    console.log("drom onforcus: " + this.dropDown);
-    if(this.dropDown)
-      this.searchWidth = false;
-    else
-      this.searchWidth = true;
+    (this.listsSearch.length > 0) ? this.dropDown = true : this.dropDown = false;
   }
 
   onblur(){
-    console.log(this.listsSearch.length);
-    this.searchWidth = true;
-    
-    console.log("from onblur: " + this.dropDown);
     this.dropDown = !this.dropDown;
-    this.onfocus();
   }
 }
