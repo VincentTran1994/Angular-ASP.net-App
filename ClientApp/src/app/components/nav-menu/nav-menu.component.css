@@ -1,15 +1,14 @@
+.dropdown{
+    position: relative;
+    display: inline-block;
+}
 .dropdown-content {
     position: absolute;
-    /* chen */
-    z-index: 99!important;
-    width: auto;
-    height: auto;
-    /* top: 56px; */
-    max-height: 300px;
-    background: #f6f6f6;
-    overflow: auto;
-    border-radius: 10px;
-    margin-top: 0px;
+    background-color: #f9f9f9;
+    width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
 }
 .listContents{
     cursor: pointer;
@@ -19,6 +18,10 @@
     color: rgb(58, 3, 58);
     background: rgb(207, 197, 231);
 }
+.search-nav{
+    width: 500px;
+}
+
 a{
     font-style: none;
     font-size: 140%;
@@ -34,21 +37,6 @@ h4{
 }
 .nav-item {
     margin-top: 1%;
-}
-
-#navSearch{
-    width: 50px;
-    height: 50%;
-    border-radius: 20px;
-    padding-left: 50px;
-    -webkit-transition: all .5s ease;
-    -moz-transition: all .5s ease;
-    -o-transition: all .5s ease;
-    -ms-transition: all .5s ease;
-    transition: all .5s ease;
-}
-#navSearch:focus {
-    width: 350px;
 }
 
 .wrapper {
