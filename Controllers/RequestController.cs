@@ -10,7 +10,7 @@ namespace angularASPApp.Controllers
 {
     public class RequestController : Controller
     {
-        public RequestRepository RequestRepository = new RequestRepository();
+        private IDataRepository RequestRepository = new RequestRepository();
 
         [HttpPost("api/add-new-request")]
         public void AddNewRequest([FromBody]object requestId)

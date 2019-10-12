@@ -10,7 +10,7 @@ namespace angularASPApp.Controllers
 {
     public class UsersController : Controller
     {
-        public UserInfoRepository UserInfoRepository = new UserInfoRepository();
+        private IDataRepository UserInfoRepository = new UserInfoRepository();
         public UserRepository UserRepository = new UserRepository();
 
         [HttpPost("api/add-new-user")]

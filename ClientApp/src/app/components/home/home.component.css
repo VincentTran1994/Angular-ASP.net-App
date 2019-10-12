@@ -1,3 +1,104 @@
-h1{
-    color: red;
+body {
+    background: white;
+    padding: 0;
+    font: 15px/20px Arial, sans-serif;
+  }
+  
+  .container1 {
+    margin: 0 auto;
+    width: 350px;
+    height: 300px;
+    position: relative;
+    perspective: 1000px;
+    z-index: 1;
+  }
+  
+  .carousel {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+  }
+  
+  .item {
+    display: block;
+    position: absolute;
+    background: #000;
+    width: 350px;
+    height: 250px;
+    line-height: 200px;
+    /*font-size: 1em;
+    text-align: center;*/
+    color: #FFF;
+    opacity: 0.95;
+    border-radius: 10px;
+    padding: auto;
+  }
+  
+  .a {
+    transform: rotateY(0deg) translateZ(400px);
+    background-image: url(http://media.comicbook.com/2017/05/pokemon-anime-movie-screen-shot-2017-05-08-at-102407-pm-995179.png);
+    background-size: 100% 100%;
+  }
+  .b {
+    transform: rotateY(60deg) translateZ(400px);
+    background-image: url(https://i.ytimg.com/vi/Meg2hWOpbCc/maxresdefault.jpg);
+    background-size: 100% 100%;
+  }
+  .c {
+    transform: rotateY(120deg) translateZ(400px);
+    background-image: url(http://cdn2us.denofgeek.com/sites/denofgeekus/files/2017/08/dragon_ball_super_episode_31_review.png);
+    background-size: 100% 100%;
+  }
+  .d {
+    transform: rotateY(180deg) translateZ(400px);
+    background-image: url(http://thebabuzz.com/wp-content/uploads/2017/09/spider-man-homecoming-banner.jpg);
+    background-size: 100% 100%;
+  }
+  .e {
+    transform: rotateY(240deg) translateZ(400px);
+    background-image: url(https://chloeandcielo.files.wordpress.com/2014/01/naruto-logo-wallpaper-hd.png);
+    background-size: 100% 100%;
+  } 
+  .f {
+    transform: rotateY(300deg) translateZ(400px);
+    background-image: url(https://i.ytimg.com/vi/ue80QwXMRHg/maxresdefault.jpg);
+    background-size: 100% 100%;
+  }
+ 
+  .next, .prev {
+    color: #999;
+    position: absolute;
+    top: 50%;
+    padding: 1em 2em;
+    cursor: pointer;
+    background: white;
+    /*border-radius: 5px;
+    border-top: 1px solid #FFF;
+    box-shadow: 0 5px 0 #999;*/
+    transition: /*box-shadow 0.1s,*/ top 0.1s;
+    font-family: Impact, "Franklin Gothic Bold", "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", "sans serif";
+    font-size: 30px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 500;
+  }
+  .next:hover, .prev:hover { color: black; }
+  .next:active, .prev:active {
+    top: 44%;
+    /*box-shadow: 0 1px 0 #999;*/
+  }
+  .next { right: 1em; }
+  .prev { left: 1em; }
+.btn-outline-secondary:hover{
+  background-color: rgb(8, 90, 128);
+  font-size: 1.5em;
+}
+body{
+  font-family: fantasy;
+}
+.display-3{
+  
+  text-shadow: 8px 8px 32px rgb(187, 185, 185);
 }

@@ -9,7 +9,7 @@ namespace angularASPApp.Controllers
 {
     public class MovieController : Controller
     {
-        MovieInfoRepository movieRespository = new MovieInfoRepository();
+        private IDataRepository movieRespository = new MovieInfoRepository();
 
         [HttpGet("api/movies")]
         public List<object> GetAllMovieInfo()

@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { HttpModule } from '@angular/http';
 import { UserService } from './services/user-service/user.service';
+import { RequestService } from './services/request-service/request.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UserService } from './services/user-service/user.service';
     ])
   ],
   providers: [
-    UserService
+    UserService,
+    RequestService
   ],
   bootstrap: [AppComponent]
 })

@@ -7,6 +7,7 @@ namespace angularASPApp.Models
 {
     public class UserInfo
     {
+        public int userId { get; set; }
         public string email { get; set; }
         public string fName { get; set; }
         public string lName { get; set; }

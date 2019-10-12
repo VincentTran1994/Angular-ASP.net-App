@@ -2,7 +2,7 @@
 
 namespace angularASPApp.DataContext
 {
-    interface IDataRepository
+    public interface IDataRepository
     {
         List<object> GetAll();
         object Get(string userId);

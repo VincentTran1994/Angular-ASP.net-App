@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestService } from '../../services/request-service/request.service';
+import { request } from '../../domain-objects/request';
 
 @Component({
   selector: 'app-contact',
@@ -6,10 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
+  public email:string;
+  public fullName:string;
+  public content:string;
+  public phonePlaceHolder : string;
+  public requests: request[];
 
-  constructor() { }
+  constructor(private requestService: RequestService) {  }
 
   ngOnInit() {
+    this.requestService.GetAllRequests().subscribe(
+      res =>{
+       this.requests = res;
+       console.log(this.requests);
+    });
   }
 
+  onsubmit(){
+    console.log(this.email + " "  + " "+this.content);
+  }
+  
 }

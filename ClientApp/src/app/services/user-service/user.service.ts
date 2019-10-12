@@ -9,7 +9,6 @@ export class UserService {
 
   public result: Object[];
   public usersInfo: userInfo[];
-
   public user: userInfo;
 
   constructor(private http: Http) { }
@@ -20,8 +19,9 @@ export class UserService {
       .map(res => this.usersInfo = res.json());
   }
 
-  public GetUser(email:string){
-    return this.http.get(this.baseApiURL + "api/user-info/" + email)
+  // Retreive a user info
+  public GetUser(userId:string){
+    return this.http.get(this.baseApiURL + "api/user-info/" + userId)
       .map(res => res.json());
   }
 

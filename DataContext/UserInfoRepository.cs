@@ -17,7 +17,8 @@ namespace angularASPApp.DataContext
             string mysqlCommand = "insert into  userInfo value(";
             
 
-            mysqlCommand += "\"" + newUser.email + "\","
+            mysqlCommand += newUser.userId.ToString() + ","
+                          + "\"" + newUser.email + "\","
                           + "\"" + newUser.fName + "\","
                           + "\"" + newUser.lName + "\","
                           + "\"" + Convert.ToString(DateTime.Now.ToString("yyyy-MM-dd")) + "\","
@@ -44,7 +45,7 @@ namespace angularASPApp.DataContext
         public bool Delete(object obj)
         {
             UserInfo deletedUser = Newtonsoft.Json.JsonConvert.DeserializeObject<UserInfo>(obj.ToString());
-            string mySqlCommand = "delete from userInfo where email=\"" + deletedUser.email + "\";";
+            string mySqlCommand = "delete from userInfo where userId=\"" + deletedUser.userId + "\";";
             
             // Execute command
             try
@@ -65,15 +66,15 @@ namespace angularASPApp.DataContext
         /// </summary>
         /// <param name="id">UserID to retrieved a user's info</param>
         /// <returns></returns>
-        public Object Get(string email)
+        public Object Get(string userdId)
         {
             UserInfo user = new UserInfo();
             List<object> list = GetAll();
             foreach (UserInfo item in list)
             {
-                if (item.email.Equals(email)) user = item;
+                if (item.userId == Convert.ToInt32(userdId)) user = item;
             }
-            return user;
+            return (user.userId < 1)? null : user;
         }
 
         /// <summary>
@@ -88,7 +89,7 @@ namespace angularASPApp.DataContext
                                 + " fName=\"" + updatedUser.fName + "\""
                                 + ",lName=\"" + updatedUser.lName + "\""
                                 + ",gender='" + updatedUser.gender +"'"
-                                + " where email = \"" + updatedUser.email +"\";";
+                                + " where userid = \"" + updatedUser.userId +"\";";
             // Execute command
             try
             {
@@ -121,6 +122,7 @@ namespace angularASPApp.DataContext
                     {
                         list.Add(new UserInfo()
                         {
+                            userId = Convert.ToInt32(reader["userid"]),
                             email = reader["email"].ToString(),
                             fName = reader["FName"].ToString(),
                             lName = reader["LName"].ToString(),

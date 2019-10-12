@@ -8,6 +8,25 @@ export class request{
         this.email = v;
     }
     
+    private fName : string;
+    public getfName() : string {
+        return this.fName;
+    }
+    public setfName(v : string) {
+        this.fName = v;
+    }
+        
+    private lName : string;
+    public getlName() : string {
+        return this.lName;
+    }
+    public setlName(v : string) {
+        this.lName = v;
+    }
+
+    public getfullName() : string {
+        return this.fName + this.lName;
+    }
     
     private userId : Number;
     public getuserId() : Number {
@@ -16,7 +35,6 @@ export class request{
     public setuserId(v : Number) {
         this.userId = v;
     }
-    
     
     private title : string;
     public gettitle() : string {

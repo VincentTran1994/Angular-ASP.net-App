@@ -44,7 +44,7 @@ namespace angularASPApp.DataContext
         public List<object> GetAll()
         {
             List<object> requests = new List<object>();
-            string mySqlCommand = "select * from request;";
+            string mySqlCommand = "select * from request left join userinfo on request.userid = userinfo.userid;";
             try
             {
                 // Execute a sql query
@@ -56,10 +56,13 @@ namespace angularASPApp.DataContext
                         requests.Add(new Request()
                         {
                             requestId = (int)reader["requestId"],
+                            email = reader["email"].ToString(),
                             userId = (int)reader["userId"],
                             title = reader["title"].ToString(),
                             content = reader["title"].ToString(),
-                            dateRequest = Convert.ToDateTime(reader["dateRequest"])
+                            dateRequest = Convert.ToDateTime(reader["dateRequest"]),
+                            lName = reader["lName"].ToString(),
+                            fName = reader["fName"].ToString()
                         });
                     }
                 }

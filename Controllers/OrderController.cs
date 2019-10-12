@@ -20,7 +20,7 @@ namespace angularASPApp.Controllers
         }
 
         [HttpGet("api/orders/{userId}")]
-        public List<object> GetOrder(string userId)
+        public virtual List<object> GetOrder(string userId)
         {
             return orderRepo.GetAll(userId);
         }
